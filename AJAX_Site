@@ -1,0 +1,29 @@
+/**
+ * Utils function used to load main fragment into main content div
+ * uses the hash tag from the address bar, expects the has to be a valid url.
+ */
+function loadFragment(){
+
+    var hash = window.location.hash;                // Get the hash value ex: #about.html
+
+    $('#main').load(hash.substr(1)+' #main');       // AJAX load of the fragment #main from that page
+
+}
+
+$( document ).ready(function(e) {
+
+    // Load the fragment on page load
+    loadFragment();
+
+    // Attach event to the 'onhashchange' event of the browser
+    $(window).on('hashchange', loadFragment);
+
+    // For each links in our menus, 
+    $('.menu a[href]').each(function(index, element) {
+
+        var href = $(element).attr('href');         // Get the href attribute of the link
+
+        $(element).attr('href', '#'+href);          // Prevent redirection by add a hash in front
+    });
+
+});
