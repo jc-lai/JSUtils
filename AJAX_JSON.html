@@ -1,1 +1,68 @@
-== AJAX
+<!doctype html>
+<html>
+<head>
+<meta charset="iso-8859-1">
+<title>AJAX &amp; JSON</title>
+<style>
+body{
+	font-family:Arial, Helvetica, sans-serif;
+}
+.results{
+	background-color:#9CC;
+	padding:40px;	
+}
+</style>
+</head>
+
+<body>
+
+<div class="results">
+
+</div>
+<br />
+<strong>data.json</strong><code>
+{
+	"name": "Code Igniter",
+	"version":  "2.1.4",
+	"company": "EllisLab"	
+}
+</code>
+<script src="js/jquery.js"></script>
+<script>
+$.ajax({
+	url: "data.json",
+	dataType:"json",
+	complete: function(data, status){
+		
+		alert(status);
+			
+		var json = data.responseJSON;
+		
+		$('.results').html(
+			"<h1>"	 +json.name		+"</h1>"+
+			"<h4>"	 +json.company	+"</h4>"+
+			"<small>"+json.version	+"</small>"
+		);
+	}
+});
+</script>
+<br />
+<strong>script</strong>
+<pre>
+$.ajax({
+	url: "data.json",
+	dataType:"json",
+	complete: function(data, status){
+		alert(status);	
+		var json = data.responseJSON;
+		
+		$('.results').html(
+			"&lt;h1>"	 +json.name		+"&lt;/h1>"+
+			"&lt;h4>"	 +json.company	+"&lt;/h4>"+
+			"&lt;small>"+json.version	+"&lt;/small>"
+		);
+	}
+});
+</pre>
+</body>
+</html>
